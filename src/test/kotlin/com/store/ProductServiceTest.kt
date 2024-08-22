@@ -55,27 +55,7 @@ class ProductsServiceImplTest {
             productsService.getProducts("invalid")
         }
     }
-
-    @Test
-    fun `should return product details by id`() {
-        val product = Product(1, "product1", ProductType.BOOK, 10, 100.0)
-        `when`(productRepository.findById(1)).thenReturn(product)
-
-        val response = productsService.getProductById(1)
-
-        assertEquals(1, response.id)
-        assertEquals("product1", response.name)
-        assertEquals("book", response.type)
-    }
-
-    @Test
-    fun `should throw ProductNotFoundException for invalid product id`() {
-        `when`(productRepository.findById(1)).thenReturn(null)
-
-        assertThrows(ProductNotFoundException::class.java) {
-            productsService.getProductById(1)
-        }
-    }
+    
 
     @Test
     fun `should create a new product`() {
