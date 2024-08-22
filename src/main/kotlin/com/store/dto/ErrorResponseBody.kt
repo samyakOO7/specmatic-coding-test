@@ -2,7 +2,7 @@ package com.store.dto
 
 import java.time.LocalDateTime
 
-//Data class Error Response Body to handle error specifications as per Open API Contract
+// generic data class for all errors across application
 data class ErrorResponseBody(
     val timestamp: LocalDateTime,
     val status: Int,

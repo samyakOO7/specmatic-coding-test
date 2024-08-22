@@ -19,7 +19,7 @@ import javax.validation.ConstraintViolationException
 @ControllerAdvice
 class ErrorHandlingControllerAdvice {
 
-    //Http Message Not Readable Exception
+    // Checks for HttpMessage as not readable by server exception
     @ExceptionHandler(HttpMessageNotReadableException::class)
     fun handleHttpMessageNotReadable(ex: HttpMessageNotReadableException): ResponseEntity<ErrorResponseBody> {
         val errorResponse = ErrorResponseBody(
@@ -30,7 +30,8 @@ class ErrorHandlingControllerAdvice {
         )
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
-    //Method Argument Invalid Exception
+
+    // Checks for method argument as not valid exception
     @ExceptionHandler(MethodArgumentNotValidException::class)
     fun handleValidationExceptions(ex: MethodArgumentNotValidException): ResponseEntity<ErrorResponseBody> {
         val errorResponse = ErrorResponseBody(
@@ -42,7 +43,7 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 
-    //Invalid Query Parameter Exception - User Defined
+    // Checks for invalid query param exception - User Defined Exception
     @ExceptionHandler(InvalidQueryParameterException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleInvalidQueryParameterException(ex: InvalidQueryParameterException): ResponseEntity<ErrorResponseBody> {
@@ -55,7 +56,7 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 
-    //Constraint Violation Exception
+    //Checks for constraint violation exception
     @ExceptionHandler(ConstraintViolationException::class)
     fun handleConstraintViolationExceptions(ex: ConstraintViolationException): ResponseEntity<ErrorResponseBody> {
         val errors = ErrorResponseBody(
@@ -67,9 +68,9 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errors, HttpStatus.BAD_REQUEST)
     }
 
-    //Product Not Found Exception - User Defined
+    //Checks for product not found exception - User Defined Exception
     @ExceptionHandler(ProductNotFoundException::class)
-    @ResponseStatus(HttpStatus.OK) // or another appropriate status
+    @ResponseStatus(HttpStatus.OK)
     fun handleProductNotFoundException(ex: ProductNotFoundException): ResponseEntity<ErrorResponseBody> {
         val errorResponse = ErrorResponseBody(
             timestamp = java.time.LocalDateTime.now(),
@@ -80,7 +81,7 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errorResponse, HttpStatus.OK)
     }
 
-    //No Handler Found Exception
+    //Checks for no handler exception
     @ExceptionHandler(NoHandlerFoundException::class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     fun handleNoHandlerFoundException(ex: NoHandlerFoundException): ResponseEntity<ErrorResponseBody> {
@@ -93,7 +94,7 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errorResponse, HttpStatus.NOT_FOUND)
     }
 
-    //Validation Exception - User Defined (For Constraint Validations)
+    // Validation exception as a base exception to all bad request - User Defined Exception
     @ExceptionHandler(ValidationException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleValidationException(ex: ValidationException): ResponseEntity<ErrorResponseBody> {
@@ -106,7 +107,7 @@ class ErrorHandlingControllerAdvice {
         return ResponseEntity(errorResponse, HttpStatus.BAD_REQUEST)
     }
 
-    //Generic exception for all use casess
+    // Base check for all generic exceptions
     @ExceptionHandler(Exception::class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     fun handleGenericException(ex: Exception): ResponseEntity<ErrorResponseBody> {
