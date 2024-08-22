@@ -10,8 +10,5 @@ interface ProductsService {
     @Throws(InvalidQueryParameterException::class)
     fun getProducts(type: String?): List<ProductDetailsResponseDto>
 
-    @Throws(ProductNotFoundException::class)
-    fun getProductById(id: Int): ProductDetailsResponseDto
-
     fun createProduct(productDetails: ProductDetails): ProductId
 }

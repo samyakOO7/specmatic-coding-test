@@ -12,11 +12,6 @@ class ProductRepositoryImpl : ProductsRepository {
     private val products = ConcurrentHashMap<Int, Product>()
     private val nextId = AtomicInteger(1)
 
-    // Find Product By Id
-    override fun findById(id: Int): Product? {
-        return products[id]
-    }
-
     // Find Product By Type
     override fun findByType(type: String): List<Product> {
         return products.values.filter { it.type.type.equals(type) }

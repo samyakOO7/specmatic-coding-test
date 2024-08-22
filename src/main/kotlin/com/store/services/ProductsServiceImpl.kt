@@ -40,19 +40,6 @@ class ProductsServiceImpl(private val productRepository: ProductsRepository) : P
         }
     }
 
-    override fun getProductById(id: Int): ProductDetailsResponseDto {
-
-        //Check for product exist or not, else ProductNotFoundException
-        val product = productRepository.findById(id)
-            ?: throw ProductNotFoundException("Product not found with id: $id")
-        return ProductDetailsResponseDto(
-            id = product.id,
-            name = product.name,
-            type = product.type.type.lowercase(), // Ensure type is lowercase in response
-            inventory = product.inventory,
-            cost = product.cost
-        )
-    }
 
     override fun createProduct(productDetails: ProductDetails): ProductId {
 

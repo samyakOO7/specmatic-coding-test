@@ -20,13 +20,6 @@ class ProductsController(private val productsService: ProductsServiceImpl) {
         return ResponseEntity(products, HttpStatus.OK)
     }
 
-    //Get Mapping of ProductsController with /products request mapping having path variable as id
-    @GetMapping("/{id}")
-    fun getProductById(@PathVariable id: Int): ResponseEntity<ProductDetailsResponseDto> {
-        val product = productsService.getProductById(id)
-        return ResponseEntity(product, HttpStatus.OK)
-    }
-
     //Post Mapping of ProductsController with /products request mapping having request body as product details
     @PostMapping
     fun createProduct(@Valid @RequestBody productDetails: ProductDetails): ResponseEntity<ProductId> {
