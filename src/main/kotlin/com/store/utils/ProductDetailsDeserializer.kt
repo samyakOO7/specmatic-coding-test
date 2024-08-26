@@ -9,11 +9,14 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.store.constants.Constants
 import com.store.dto.ProductDetails
 import jakarta.annotation.PostConstruct
+import org.springframework.stereotype.Component
 import org.springframework.beans.factory.annotation.Value
-import java.io.File
+import org.springframework.core.io.Resource
+import java.io.InputStreamReader
 
+@Component
 class ProductDetailsDeserializer(
-    @Value("\${file.path}") private val filePath: String // Inject filePath through constructor
+    @Value("\${file.path}") private val filePath: Resource // Inject Resource through constructor
 ) : JsonDeserializer<ProductDetails>() {
 
     // Object Mapper to map YAML response
@@ -25,7 +28,7 @@ class ProductDetailsDeserializer(
         schema = loadSchemaFromFile() // Initialize schema after filePath is injected
     }
 
-    //Deserialization using JsonParser of entity values
+    // Deserialization using JsonParser of entity values
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): ProductDetails {
         val node: JsonNode = p.codec.readTree(p)
 
@@ -40,9 +43,8 @@ class ProductDetailsDeserializer(
             cost = node.get(Constants.COST)?.let { validator.validateField(Constants.COST, it) as Double? } ?: 0.0
         )
     }
-
     // Method to load schema from filepath
     private fun loadSchemaFromFile(): JsonNode {
-        return objectMapper.readTree(File(filePath))
+        return objectMapper.readTree(InputStreamReader(filePath.inputStream))
     }
 }
