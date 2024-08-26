@@ -11,20 +11,18 @@ import com.store.dto.ProductDetails
 import org.springframework.beans.factory.annotation.Value
 import java.io.File
 
-class ProductDetailsDeserializer : JsonDeserializer<ProductDetails>() {
+class ProductDetailsDeserializer(
+@Value(Constants.FILE_PATH) private val filePath: String // Inject filePath through constructor
+) : JsonDeserializer<ProductDetails>() {
 
-    // File path for product_api.yaml from application.properties
-    @Value(Constants.FILE_PATH)
-    lateinit var filePath: String
 
     //Object Mapper to map YAML response
     private val objectMapper = ObjectMapper(YAMLFactory())
-    private lateinit var schema: JsonNode
+    private val schema: JsonNode by lazy { loadSchemaFromFile() } // Lazy initialization
 
     //Deserialization using JsonParser of entity values
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): ProductDetails {
         val node: JsonNode = p.codec.readTree(p)
-        schema = loadSchemaFromFile()
 
         val validator = FieldValidator(schema.path(Constants.COMPONENTS)
             .path(Constants.SCHEMAS))
