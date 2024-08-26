@@ -15,6 +15,8 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         java: [17]
     runs-on: ${{ matrix.os }}
+    env:
+      FILE_PATH: products_api.yaml  # Set environment variable to the file name
     steps:
     - uses: actions/checkout@v4
       with:

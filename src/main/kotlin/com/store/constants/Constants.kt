@@ -28,7 +28,8 @@ object Constants {
     const val VALIDATION_ERROR_MESSAGE = "Validation error"
 
     // Constants in Deserializer of Product Details
-    const val FILE_PATH = "\${file.path}"
+    const val FILE_PATH = "FILE_PATH"
+    const val FILE_PATH_ERROR = "FILE_PATH environment variable is not set"
     const val COMPONENTS = "components"
     const val SCHEMAS = "schemas"
     const val NAME = "name"
