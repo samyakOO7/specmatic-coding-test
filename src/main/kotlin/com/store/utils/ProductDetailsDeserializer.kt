@@ -8,17 +8,22 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory
 import com.store.constants.Constants
 import com.store.dto.ProductDetails
+import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Value
 import java.io.File
 
 class ProductDetailsDeserializer(
-@Value(Constants.FILE_PATH) private val filePath: String // Inject filePath through constructor
+    @Value("\${file.path}") private val filePath: String // Inject filePath through constructor
 ) : JsonDeserializer<ProductDetails>() {
 
-
-    //Object Mapper to map YAML response
+    // Object Mapper to map YAML response
     private val objectMapper = ObjectMapper(YAMLFactory())
-    private val schema: JsonNode by lazy { loadSchemaFromFile() } // Lazy initialization
+    private lateinit var schema: JsonNode
+
+    @PostConstruct
+    fun init() {
+        schema = loadSchemaFromFile() // Initialize schema after filePath is injected
+    }
 
     //Deserialization using JsonParser of entity values
     override fun deserialize(p: JsonParser, ctxt: DeserializationContext): ProductDetails {

@@ -22,7 +22,7 @@ class ProductsController(private val productsService: ProductsService) {
 
     //Post Mapping of ProductsController with /products request mapping having request body as product details
     @PostMapping
-    fun createProduct(@RequestBody productDetails: ProductDetails): ResponseEntity<ProductId> {
+    fun createProduct(@Valid @RequestBody productDetails: ProductDetails): ResponseEntity<ProductId> {
         val productId = productsService.createProduct(productDetails)
         // Return a ResponseEntity with the Product and CREATED status
         return ResponseEntity(productId, HttpStatus.CREATED)
