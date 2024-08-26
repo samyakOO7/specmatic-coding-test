@@ -28,5 +28,6 @@ jobs:
         java-version: ${{ matrix.java }}
     - name: Build with Maven
       working-directory: main
-      run: mvn test -Dmaven.surefire.debug -DargLine="-Xmx2g -Xms1g"
+      run: mvn test -X -DargLine="-Xmx2g -Xms1g"
+
 
