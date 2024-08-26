@@ -2,16 +2,37 @@ package com.store.constants
 
 
 object Constants {
-    const val PRODUCT_NAME = "Product name"
-    const val PRODUCT_TYPE = "Product type"
-    const val PRODUCT_INVENTORY = "Product inventory"
-    const val COST_FIELD = "cost"
-    const val INVENTORY_FIELD = "inventory"
-    const val NAME_FIELD = "name"
-    const val TYPE_FIELD = "type"
+    val BOOLEAN_VALUES = setOf("true", "false")
 
-    val VALID_PRODUCT_TYPES = setOf("book", "food", "gadget", "other")
-    const val COST_DEFAULT_VALUE = 0.0
-    const val COST_NULL_ERROR = "Cost cannot be null"
-    const val COST_NUMBER_ERROR = "Cost must be a number"
+    //Constants for validator method
+    const val REF_PATH_PREFIX = "#/components/schemas/"
+    const val MINIMUM = "minimum"
+    const val MAXIMUM = "maximum"
+    const val REF = "\$ref"
+    const val TYPE = "type"
+    const val PROPERTIES = "properties"
+    const val REQUIRED = "required"
+    const val ENUM = "enum"
+    const val PRODUCT_DETAILS = "ProductDetails"
+    const val STRING_TYPE = "string"
+    const val INTEGER_TYPE = "integer"
+    const val NUMBER_TYPE = "number"
+    const val ENUM_TYPE = "enum"
+    const val NULL = "null"
+
+    // Error constants
+    const val DEFAULT_ERROR_MESSAGE = "Internal server error"
+    const val PRODUCT_NOT_FOUND_MESSAGE = "Product not found"
+    const val API_ENDPOINT_NOT_FOUND_MESSAGE = "API endpoint not found"
+    const val INVALID_CONSTRAINTS_MESSAGE = "Invalid constraints"
+    const val VALIDATION_ERROR_MESSAGE = "Validation error"
+
+    // Constants in Deserializer of Product Details
+    const val FILE_PATH = "\${file.path}"
+    const val COMPONENTS = "components"
+    const val SCHEMAS = "schemas"
+    const val NAME = "name"
+    const val INVENTORY = "inventory"
+    const val COST = "cost"
+
 }

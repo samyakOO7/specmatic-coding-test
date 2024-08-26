@@ -10,8 +10,9 @@ import com.store.utils.ProductDetailsDeserializer
  * (Object Mapper would be another approach for the same)
  */
 @JsonDeserialize(using = ProductDetailsDeserializer::class)
+// ProductDetails class
 data class ProductDetails(
-    @field:JsonProperty("name")       //Json Property helps annotate proper naming json identifiers
+    @field:JsonProperty("name")     //Json Property helps annotate proper naming json identifiers
     val name: String,
 
     @field:JsonProperty("type")

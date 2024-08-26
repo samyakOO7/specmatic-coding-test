@@ -1,15 +1,12 @@
 package com.store.models
 
-import com.store.enums.ProductType
-
-
 /**
- * Represents a product entity in the system.
+ * Represents a product entity in the system with fields.
  */
-class Product(
-    var id: Int,
+data class Product (
+    val id: Int,
     val name: String,
-    val type: ProductType, //Product Type Enum defined
+    val type: String,
     val inventory: Int,
-    val cost: Double?  // Use nullable Double for optional cost
+    val cost: Double?
 )

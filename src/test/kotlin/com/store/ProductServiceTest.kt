@@ -1,11 +1,9 @@
 package com.store
 
-import com.store.services.ProductsServiceImpl
+import com.store.services.ProductsService
 import com.store.dto.ProductDetails
 import com.store.enums.ProductType
-import com.store.exceptions.ProductNotFoundException
 import com.store.exceptions.InvalidQueryParameterException
-import com.store.repositories.ProductsRepository
 import com.store.models.Product
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.BeforeEach
@@ -14,15 +12,15 @@ import org.mockito.Mockito.*
 import org.mockito.Mockito.`when`
 
 
-class ProductsServiceImplTest {
+class ProductsServiceTest {
 
     private lateinit var productRepository: ProductsRepository
-    private lateinit var productsService: ProductsServiceImpl
+    private lateinit var productsService: ProductsService
 
     @BeforeEach
     fun setUp() {
         productRepository = mock(ProductsRepository::class.java)
-        productsService = ProductsServiceImpl(productRepository)
+        productsService = ProductsService(productRepository)
     }
 
     @Test
