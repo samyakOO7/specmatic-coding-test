@@ -13,7 +13,7 @@ class FieldValidator(private val schema: JsonNode) {
             .path(Constants.PROPERTIES).path(fieldName)
         val fieldType = fieldSchema.path(Constants.TYPE).asText()
             .takeIf { !fieldSchema.has(Constants.ENUM) }
-            ?: Constants.ENUM_TYPE
+            ?: Constants.ENUM
 
         val requiredFields = this.schema.path(Constants.PRODUCT_DETAILS)
             .path(Constants.REQUIRED).map { it.asText() }.toSet()
@@ -30,7 +30,7 @@ class FieldValidator(private val schema: JsonNode) {
             Constants.STRING_TYPE -> validateString(fieldName, value?.asText(), fieldSchema)
             Constants.INTEGER_TYPE -> validateInteger(fieldName, value, fieldSchema)
             Constants.NUMBER_TYPE -> validateDouble(fieldName, value, fieldSchema)
-            Constants.ENUM_TYPE -> validateEnum(fieldName, value?.asText(), fieldSchema)
+            Constants.ENUM -> validateEnum(fieldName, value?.asText(), fieldSchema)
             else -> if (fieldSchema.has(Constants.REF))
                 validateReference(fieldName, value, fieldSchema.path(Constants.REF).asText())
             else throw ValidationException("Unsupported field type: $fieldType")

@@ -17,7 +17,6 @@ object Constants {
     const val STRING_TYPE = "string"
     const val INTEGER_TYPE = "integer"
     const val NUMBER_TYPE = "number"
-    const val ENUM_TYPE = "enum"
     const val NULL = "null"
 
     // Error constants
